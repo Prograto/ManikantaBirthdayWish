@@ -112,13 +112,11 @@
   </style>
 </head>
 <body>
-  <!-- Audio Element for Background Music -->
-  <audio id="birthday-audio" loop autoplay>
+  <audio id="birthday-audio" loop autoplay muted>
     <source src="bd.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
-  
-  <!-- Birthday Greeting Container -->
+
   <div id="birthday-container">
     <div class="flex-row">
       <h1>Happy Birthday Manikanta!</h1>
@@ -128,9 +126,19 @@
   </div>
 
   <script>
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('birthday-audio');
+      audio.play().catch(() => {
+        console.log("Autoplay blocked, but no action needed as it's optional.");
+      });
+
+      setTimeout(() => {
+        audio.muted = false;
+      }, 500); 
+    });
+
     const bunnyImg = document.getElementById('bunny-img');
     const greeting = document.getElementById('greeting');
-    const audio = document.getElementById('birthday-audio');
 
     const texts = [
       "Hey Manikanta", 
@@ -187,13 +195,6 @@
         currentIndex = (currentIndex + 1) % texts.length;
       }, 500); 
     }, 3500);
-
-    window.addEventListener('load', () => {
-      // Try to autoplay when the page loads
-      audio.play().catch(() => {
-        console.log("Autoplay blocked, but no action needed as it's optional.");
-      });
-    });
   </script>
 </body>
 </html>
