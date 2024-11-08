@@ -189,6 +189,7 @@
     }, 3500);
 
     window.addEventListener('load', () => {
+      // Try to autoplay when the page loads
       audio.play().catch(() => {
         console.log("Autoplay blocked, but no action needed as it's optional.");
       });
