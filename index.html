@@ -81,6 +81,10 @@
         max-width: 800px;
       }
       
+      .flex-row {
+        flex-direction: row;
+      }
+
       h1 {
         font-size: 2em;
       }
@@ -95,6 +99,7 @@
       }
     }
 
+    /* Adjustments for smaller screens */
     @media (max-width: 480px) {
       h1 {
         font-size: 1.2em;
@@ -142,11 +147,12 @@
       });
     }
 
+    // Simulate a user click after the page loads
     window.addEventListener('load', () => {
-      simulateUserClick(); 
+      simulateUserClick(); // Automatically simulate the click
     });
 
-
+    // Your existing code for changing the greeting and images
     const texts = [
       "Hey Manikanta", 
       "It's Your Birthday", 
