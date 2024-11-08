@@ -75,16 +75,24 @@
       opacity: 1;
     }
 
+    #play-audio {
+      font-size: 1em;
+      padding: 10px 20px;
+      background-color: #00ff00;
+      border: none;
+      color: #222;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+      display: none;
+    }
+
     /* Adjustments for larger screens */
     @media (min-width: 768px) {
       #birthday-container {
         max-width: 800px;
       }
       
-      .flex-row {
-        flex-direction: row;
-      }
-
       h1 {
         font-size: 2em;
       }
@@ -117,32 +125,37 @@
   </style>
 </head>
 <body>
-  <audio autoplay loop>
+  <!-- Audio Element for Background Music -->
+  <audio id="birthday-audio" loop>
     <source src="bd.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
   
+  <!-- Birthday Greeting Container -->
   <div id="birthday-container">
     <div class="flex-row">
       <h1>Happy Birthday Manikanta!</h1>
       <img id="bunny-img" src="manikanta1.jpeg" alt="Manikanta">
     </div>
     <div id="greeting">Let's Begin</div>
+    <button id="play-audio" onclick="playAudio()">Play Birthday Song</button>
   </div>
 
   <script>
     const bunnyImg = document.getElementById('bunny-img');
     const greeting = document.getElementById('greeting');
+    const audio = document.getElementById('birthday-audio');
+    const playButton = document.getElementById('play-audio');
 
     const texts = [
       "Hey Manikanta", 
       "It's Your Birthday", 
       "You Are a Good Brother", 
-      "Well wisher to all", 
+      "Well-wisher to all", 
       "Problem Solver", 
       "And a Good Son", 
       "And Wise man,", 
-      "Who Always Think's", 
+      "Who Always Thinks", 
       "About the Family!",
       "And wish you a,",
       "Very Pleasant and Joyful Birthday!"
@@ -163,6 +176,7 @@
     
     let currentIndex = 0;
 
+    // Function to cycle through texts, colors, and images
     setInterval(() => {
       bunnyImg.style.opacity = '0';
       
@@ -188,7 +202,23 @@
 
         currentIndex = (currentIndex + 1) % texts.length;
       }, 500); 
-    }, 3500); 
+    }, 3500);
+
+    // Attempt to autoplay audio, show play button if it fails
+    document.addEventListener('DOMContentLoaded', () => {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          playButton.style.display = 'block'; // Show play button if autoplay fails
+        });
+      }
+    });
+
+    // Function to play audio manually
+    function playAudio() {
+      audio.play();
+      playButton.style.display = 'none';
+    }
   </script>
 </body>
 </html>
